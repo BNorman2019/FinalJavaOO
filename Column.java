@@ -4,22 +4,20 @@ public class Column
 {
   private ArrayList<Pixel> pixelList = new ArrayList<Pixel>();
 
+	public Column(){}
+
   public Column(ArrayList<Pixel> list)
   {
     this.pixelList = list;
   }
 
-  public void addPixelToColumn(Pixel pixel)
+  public void addPixel(Pixel pixel)
   {
     pixelList.add(pixel);
   }
 
-  //public Pixel getPixelFromColumn(int element)
-  //{
-  //  return pixelList.get(element);
-  //}
-
-  
-
-
+  public Pixel getPixel(int element)
+  {
+    return pixelList.get(element);
+  }
 }
