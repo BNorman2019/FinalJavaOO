@@ -18,23 +18,27 @@ public class PPM
 		imageBase = image;
 	}
 
-	public void generatePPM()
+	public PPM(String file)
+	{
+
+	}
+
+	public void generatePPM(String fileName)
 	{
 		String header = identifier + " " + width + " " + height + " " + maxValue + "\n";
 		
 		try
 		{
-			FileWriter myWriter = new FileWriter("output.txt");
+			FileWriter myWriter = new FileWriter(fileName + ".txt");
         	myWriter.write(header);
-			for(int i = 0; i < imageBase.getWidth(); i++)
+			for(int i = 0; i < imageBase.getHeight(); i++)
 			{
-				for(int j = 0; j < imageBase.getHeight(); j++)
+				for(int j = 0; j < imageBase.getWidth(); j++)
 				{
-					 myWriter.write(Integer.toBinaryString(imageBase.getPixel(i, j).getRed()) + ' ' + Integer.toBinaryString(imageBase.getPixel(i, j).getGreen()) + ' ' + Integer.toBinaryString(imageBase.getPixel(i, j).getBlue()) + '\t');
+					 myWriter.write(Integer.toBinaryString(imageBase.getPixel(j, i).getRed()) + ' ' + Integer.toBinaryString(imageBase.getPixel(j, i).getGreen()) + ' ' + Integer.toBinaryString(imageBase.getPixel(j, i).getBlue()) + '\t');
 				}
+				myWriter.write('\n');
 			}
-			
-
 			myWriter.close();
 		}
 		catch(IOException e)
@@ -44,5 +48,4 @@ public class PPM
 		}
 		
 	}
-
 }
