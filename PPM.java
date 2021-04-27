@@ -1,6 +1,6 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
+
 
 public class PPM
 {
@@ -20,6 +20,9 @@ public class PPM
 
 	public PPM(String file)
 	{
+		Scanner scanner = new Scanner(file);
+		String header = scanner.nextLine();
+		header.split(" ");
 
 	}
 
@@ -47,5 +50,22 @@ public class PPM
      		e.printStackTrace();
 		}
 		
+	}
+
+	public void modifyPixel(Scanner scanner)
+	{
+		System.out.println("What pixel would you like to modify? Enter x then y.");
+		int x = scanner.nextInt();
+		int y = scanner.nextInt();
+		Pixel p = imageBase.getPixel(x, y);
+
+		System.out.println("What values would you like to give the pixel? Enter r, g, then b.");
+		int r = scanner.nextInt();
+		int g = scanner.nextInt();
+		int b = scanner.nextInt();
+
+		p.setRed(r);
+		p.setGreen(g);
+		p.setBlue(b);
 	}
 }

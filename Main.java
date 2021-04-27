@@ -21,7 +21,7 @@ class Main {
 		{
 			System.out.println("Input file name");
 			String file = console.next();
-			PPM ppm = new PPM(file);
+			PPM ppm = new PPM(file + ".txt");
 			choice = 0;
 			while(choice != 4)
 			{
@@ -31,36 +31,18 @@ class Main {
 				switch(choice)
 				{
 					case 1:
-					modifyPixel();
+					ppm.modifyPixel(console);
 					break;
 					case 2:
-					modifyRow();
+					//modifyRow();
 					break;
 					case 3:
-					modifyImage();
+					//modifyImage();
 					break;
 					default:
 				}
 			}
 		}
   	}
-
-}
-
-public void modifyPixel(Scanner scanner)
-{
-	System.out.println("What pixel would you like to modify? Enter x and y.");
-	int x = scanner.nextInt();
-	int y = scanner.nextInt();
-
-}
-
-public void modifyRow() 
-{
-
-}
-
-public void modifyImage()
-{
 
 }
