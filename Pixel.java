@@ -1,8 +1,8 @@
 public class Pixel
 {
-  private int red;
-  private int green;
-  private int blue;
+  int red;
+  int green;
+  int blue;
 
   public Pixel(int r, int g, int b)
   {

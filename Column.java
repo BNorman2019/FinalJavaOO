@@ -20,4 +20,9 @@ public class Column
   {
     return pixelList.get(element);
   }
+
+  public int getSize()
+  {
+	  return pixelList.size();
+  }
 }

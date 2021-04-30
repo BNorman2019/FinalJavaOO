@@ -1,10 +1,10 @@
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class PPM
 {
-	String identifier = "P6";
+	String identifier = "P3";
 	String width;
 	String height;
 	String maxValue = "255";
@@ -20,9 +20,60 @@ public class PPM
 
 	public PPM(String file)
 	{
-		Scanner scanner = new Scanner(file);
-		String header = scanner.nextLine();
-		header.split(" ");
+		try
+		{
+			File thing = new File(file);
+			Scanner scanner = new Scanner(thing);
+			String header = scanner.nextLine();
+			//header = scanner.nextLine();
+			String[] arrOfStr = header.split(" ");
+
+			if(arrOfStr[0].equals(identifier))
+			{
+				width = arrOfStr[1];
+				height = arrOfStr[2];
+				maxValue = arrOfStr[3];
+				ArrayList<Column> list = new ArrayList<Column>();
+
+				for(int i = 0; i < Integer.parseInt(height); i++)
+				{
+					String line = scanner.nextLine();
+					String[] split = line.split("\\t+");
+					ArrayList<Pixel> pixelList = new ArrayList<Pixel>();
+					//System.out.println(Arrays.toString(split));
+					
+					
+					for(int j = 0; j < Integer.parseInt(width); j++)
+					{
+						char[] rgb = split[j].toCharArray();
+						Pixel pixel = new Pixel(Character.getNumericValue(rgb[0]), Character.getNumericValue(rgb[2]), Character.getNumericValue(rgb[4]));
+						//System.out.println(String.valueOf(pixel.getRed()));
+						pixelList.add(pixel);
+					}
+					Column column = new Column(pixelList);
+					list.add(column);
+				}
+				scanner.close();
+				Image base = new Image(list, Integer.parseInt(width), Integer.parseInt(height));
+				imageBase = base;
+
+				/*for(int i = 0; i < list.size(); i++)
+				{
+					for(int j = 0; i < list.get(i).getSize(); i++)
+					{
+						System.out.println(list.get(i).getPixel(j).getRed());
+					}
+				}*/
+			}
+			else
+			{
+				System.out.println("FAIL");
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 
 	}
 
@@ -38,7 +89,8 @@ public class PPM
 			{
 				for(int j = 0; j < imageBase.getWidth(); j++)
 				{
-					 myWriter.write(Integer.toBinaryString(imageBase.getPixel(j, i).getRed()) + ' ' + Integer.toBinaryString(imageBase.getPixel(j, i).getGreen()) + ' ' + Integer.toBinaryString(imageBase.getPixel(j, i).getBlue()) + '\t');
+					//System.out.println(imageBase.getPixel(j, i).getRed());
+					myWriter.write(Integer.toString(imageBase.getPixel(j, i).getRed()) + ' ' + Integer.toString(imageBase.getPixel(j, i).getGreen()) + ' ' + Integer.toString(imageBase.getPixel(j, i).getBlue()) + '\t');
 				}
 				myWriter.write('\n');
 			}
